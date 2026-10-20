@@ -1,0 +1,814 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mein kleines deutsches Heft - كشكولي الألماني الصغير</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Caveat:wght@500;700&family=Fredoka:wght@400;600;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        woodDark: '#2c1810',
+                        woodMedium: '#3d2314',
+                        woodBorder: '#5c3a21',
+                        woodAccent: '#8b4513',
+                        paperBg: '#f4eedc',
+                        paperCard: '#eadaa8',
+                        kraft: '#d7ccc8',
+                        warmAmber: '#c68b59',
+                        chalkWhite: '#f8f9fa',
+                        vintageRed: '#8b3a3a',
+                        oliveGreen: '#556b2f',
+                        inkBlue: '#1d3557'
+                    },
+                    fontFamily: {
+                        handwriting: ['Caveat', 'cursive'],
+                        arabic: ['Tajawal', 'sans-serif'],
+                        arabicClassic: ['Amiri', 'serif'],
+                        german: ['Fredoka', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Textures & Hand-drawn Elements */
+        body {
+            background-color: #2c1810;
+            background-image: radial-gradient(#3d2314 15%, transparent 16%), radial-gradient(#22120b 15%, transparent 16%);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
+            font-family: 'Tajawal', sans-serif;
+            color: #2c1810;
+        }
+
+        .paper-texture {
+            background-color: #f4eedc;
+            background-image: radial-gradient(#e5d8b8 1px, transparent 0);
+            background-size: 24px 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4), inset 0 0 80px rgba(139, 69, 19, 0.15);
+        }
+
+        .notebook-lines {
+            background-image: repeating-linear-gradient(transparent, transparent 31px, rgba(139, 69, 19, 0.15) 31px, rgba(139, 69, 19, 0.15) 32px);
+        }
+
+        .wooden-frame {
+            border: 12px solid #3d2314;
+            border-image: linear-gradient(to bottom right, #5c3a21, #2c1810, #3d2314) 1 1 1 1;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.8), 0 20px 40px rgba(0,0,0,0.6);
+        }
+
+        .washi-tape {
+            position: absolute;
+            height: 28px;
+            width: 110px;
+            background-color: rgba(215, 204, 200, 0.7);
+            border-left: 2px dashed rgba(0,0,0,0.1);
+            border-right: 2px dashed rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            backdrop-filter: blur(2px);
+            z-index: 20;
+        }
+
+        .tape-top-left { top: -12px; left: 20px; transform: rotate(-6deg); }
+        .tape-top-right { top: -12px; right: 20px; transform: rotate(5deg); }
+
+        .card-flip {
+            perspective: 1000px;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .card-flip.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 12px;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+        }
+
+        /* Handwritten font utility */
+        .hw-text {
+            font-family: 'Caveat', cursive;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #2c1810;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #8b4513;
+            border-radius: 5px;
+            border: 2px solid #2c1810;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c68b59;
+        }
+
+        /* Wood Button Glow Effects */
+        .wood-btn {
+            background: linear-gradient(145deg, #5c3a21, #3d2314);
+            box-shadow: 3px 3px 6px #1a0e0a, -1px -1px 3px #6e4628;
+            transition: all 0.2s ease;
+        }
+        .wood-btn:hover {
+            background: linear-gradient(145deg, #6e4628, #4a2b18);
+            transform: translateY(-2px);
+        }
+        .wood-btn:active {
+            transform: translateY(1px);
+            box-shadow: inset 2px 2px 5px #1a0e0a;
+        }
+
+        .wood-btn-active {
+            background: linear-gradient(145deg, #8b3a3a, #5c2424) !important;
+            color: #f8f9fa !important;
+            border-color: #c68b59 !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-2 sm:p-4 md:p-6 flex flex-col justify-between selection:bg-warmAmber selection:text-woodDark">
+
+    <!-- App Container -->
+    <div class="max-w-6xl mx-auto w-full">
+
+        <!-- HEADER SECTION -->
+        <header class="relative mb-6 wooden-frame rounded-2xl bg-woodDark p-4 sm:p-6 text-chalkWhite">
+            <!-- Decorative Wood Grain Overlay -->
+            <div class="absolute inset-0 opacity-10 pointer-events-none rounded-xl" style="background-image: radial-gradient(#fff 1px, transparent 0); background-size: 16px 16px;"></div>
+            
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 relative z-10">
+                
+                <!-- Title & Badge -->
+                <div class="text-center md:text-right">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-vintageRed/80 text-paperBg rounded-full text-xs font-semibold mb-2 border border-warmAmber">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span>دليلك التفاعلي لتعلم الألمانية</span>
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-warmAmber tracking-wide font-german drop-shadow-md flex items-center justify-center md:justify-start gap-3">
+                        <span>Mein kleines deutsches Heft</span>
+                    </h1>
+                    <p class="text-xl sm:text-2xl text-paperBg font-arabicClassic mt-1 opacity-90 font-bold">
+                        كشكولي الألماني الصغير — الحروف والأرقام مع النطق
+                    </p>
+                </div>
+
+                <!-- Main Navigation Tabs -->
+                <nav class="flex flex-wrap justify-center gap-2 bg-woodMedium/80 p-1.5 rounded-xl border border-woodBorder">
+                    <button onclick="switchTab('alphabet')" id="tab-alphabet" class="nav-tab wood-btn wood-btn-active px-4 py-2.5 rounded-lg font-bold text-sm sm:text-base flex items-center gap-2 text-paperBg transition-all">
+                        <i class="fa-solid fa-font text-warmAmber"></i>
+                        <span>الأبجدية (Alphabet)</span>
+                    </button>
+                    <button onclick="switchTab('numbers')" id="tab-numbers" class="nav-tab wood-btn px-4 py-2.5 rounded-lg font-bold text-sm sm:text-base flex items-center gap-2 text-paperBg opacity-80 hover:opacity-100 transition-all">
+                        <i class="fa-solid fa-arrow-1-9 text-warmAmber"></i>
+                        <span>الأرقام (Zahlen)</span>
+                    </button>
+                    <button onclick="switchTab('quiz')" id="tab-quiz" class="nav-tab wood-btn px-4 py-2.5 rounded-lg font-bold text-sm sm:text-base flex items-center gap-2 text-paperBg opacity-80 hover:opacity-100 transition-all">
+                        <i class="fa-solid fa-brain text-warmAmber"></i>
+                        <span>اختبر نفسك (Quiz)</span>
+                    </button>
+                </nav>
+
+            </div>
+
+            <!-- Speech Audio Engine Status / Controls bar -->
+            <div class="mt-4 pt-3 border-t border-woodBorder/60 flex flex-wrap justify-between items-center text-xs text-kraft/80 gap-2">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block animate-pulse"></span>
+                    <span id="speech-status">محرك النطق الألماني متصل وجاهز للعمل</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="testAudioEngine()" class="hover:text-warmAmber transition-colors flex items-center gap-1">
+                        <i class="fa-solid fa-volume-high"></i> اختبر الصوت
+                    </button>
+                    <span>|</span>
+                    <span><i class="fa-solid fa-lightbulb text-amber-400"></i> اضغط على أي كارت لسماع النطق الصحيح</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- SEARCH AND FILTER BAR -->
+        <section id="search-section" class="mb-6">
+            <div class="bg-woodDark/90 p-3 rounded-xl border border-woodBorder flex flex-col sm:flex-row justify-between items-center gap-3 shadow-lg">
+                <div class="relative w-full sm:w-80">
+                    <input type="text" id="search-input" oninput="filterContent()" placeholder="بحث عن حرف، رقم، أو كلمة..." 
+                        class="w-full pl-4 pr-10 py-2 rounded-lg bg-paperBg/90 text-woodDark font-semibold placeholder-woodDark/50 focus:outline-none focus:ring-2 focus:ring-warmAmber text-sm">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-woodDark/60"></i>
+                </div>
+
+                <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+                    <span class="text-xs text-kraft font-bold hidden sm:inline">فلترة السريعة:</span>
+                    <div id="category-filters" class="flex gap-1.5 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MAIN CONTENT AREA (Notebook Sheet) -->
+        <main id="notebook-sheet" class="paper-texture notebook-lines rounded-2xl p-4 sm:p-8 border-4 border-woodBorder relative min-h-[500px]">
+            
+            <!-- Tape Decorations -->
+            <div class="washi-tape tape-top-left"></div>
+            <div class="washi-tape tape-top-right"></div>
+
+            <!-- SECTION 1: ALPHABET -->
+            <div id="view-alphabet" class="tab-view">
+                <div class="flex justify-between items-center mb-6 pb-2 border-b-2 border-woodDark/20">
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-woodDark font-arabicClassic flex items-center gap-2">
+                            <span>الأبجدية الألمانية والحروف الخاصة</span>
+                            <span class="text-sm font-handwriting text-vintageRed text-2xl font-normal">(Das Alphabet)</span>
+                        </h2>
+                        <p class="text-xs sm:text-sm text-woodDark/70 mt-1">تتكون الألمانية من 26 حرفاً أساسياً + 4 حروف خاصة (Ä, Ö, Ü, ß)</p>
+                    </div>
+                    <span class="bg-woodDark text-paperBg px-3 py-1 rounded-full text-xs font-bold font-german" id="alphabet-count">30 الحروف</span>
+                </div>
+
+                <!-- Alphabet Grid -->
+                <div id="alphabet-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <!-- Cards dynamically generated here -->
+                </div>
+            </div>
+
+            <!-- SECTION 2: NUMBERS -->
+            <div id="view-numbers" class="tab-view hidden">
+                <div class="flex justify-between items-center mb-6 pb-2 border-b-2 border-woodDark/20">
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-woodDark font-arabicClassic flex items-center gap-2">
+                            <span>الأرقام الألمانية والتعديد</span>
+                            <span class="text-sm font-handwriting text-vintageRed text-2xl font-normal">(Die Zahlen)</span>
+                        </h2>
+                        <p class="text-xs sm:text-sm text-woodDark/70 mt-1">تعلم الأرقام من 0 إلى 20 والعشرات مع العداد البصري ونطقها بالكامل</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="renderNumbers('all')" class="num-filter-btn active-num-filter px-2.5 py-1 text-xs font-bold rounded bg-woodDark text-paperBg">الكل</button>
+                        <button onclick="renderNumbers('0-10')" class="num-filter-btn px-2.5 py-1 text-xs font-bold rounded bg-woodDark/10 text-woodDark hover:bg-woodDark/20">0 - 10</button>
+                        <button onclick="renderNumbers('11-20')" class="num-filter-btn px-2.5 py-1 text-xs font-bold rounded bg-woodDark/10 text-woodDark hover:bg-woodDark/20">11 - 20</button>
+                        <button onclick="renderNumbers('tens')" class="num-filter-btn px-2.5 py-1 text-xs font-bold rounded bg-woodDark/10 text-woodDark hover:bg-woodDark/20">العشرات</button>
+                    </div>
+                </div>
+
+                <!-- Numbers Grid -->
+                <div id="numbers-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <!-- Numbers Cards dynamically generated here -->
+                </div>
+            </div>
+
+            <!-- SECTION 3: QUIZ / PRACTICE MODE -->
+            <div id="view-quiz" class="tab-view hidden">
+                <div class="max-w-2xl mx-auto text-center">
+                    
+                    <div class="mb-6">
+                        <h2 class="text-3xl font-bold text-woodDark font-arabicClassic">تحدي الذاكرة والنطق</h2>
+                        <p class="text-sm text-woodDark/80">اختبر مدى حفظك للحروف والأرقام الألمانية وطريقة نطقها!</p>
+                    </div>
+
+                    <!-- Quiz Mode Selectors -->
+                    <div class="flex justify-center gap-3 mb-8">
+                        <button onclick="startQuiz('alphabet')" id="quiz-mode-alphabet" class="quiz-mode-btn wood-btn wood-btn-active px-4 py-2 rounded-lg text-sm font-bold text-paperBg">اختبار الحروف</button>
+                        <button onclick="startQuiz('numbers')" id="quiz-mode-numbers" class="quiz-mode-btn wood-btn px-4 py-2 rounded-lg text-sm font-bold text-paperBg opacity-80">اختبار الأرقام</button>
+                    </div>
+
+                    <!-- Quiz Score Board -->
+                    <div class="flex justify-between items-center bg-woodDark/10 p-3 rounded-xl mb-6 border border-woodDark/20">
+                        <div class="text-right">
+                            <span class="text-xs text-woodDark/70 block">النقاط اليومية</span>
+                            <span id="quiz-score" class="text-xl font-bold text-vintageRed font-german">0 / 0</span>
+                        </div>
+                        <div class="text-center">
+                            <span class="text-xs text-woodDark/70 block">البطاقة الحالية</span>
+                            <span id="quiz-progress" class="text-sm font-bold text-woodDark font-german">1 من 10</span>
+                        </div>
+                        <button onclick="resetQuiz()" class="text-xs text-woodDark hover:text-vintageRed underline font-bold">
+                            <i class="fa-solid fa-rotate-right"></i> إعادة البدء
+                        </button>
+                    </div>
+
+                    <!-- Interactive Flashcard -->
+                    <div class="card-flip w-full h-72 cursor-pointer mb-6" id="quiz-card" onclick="flipQuizCard()">
+                        <div class="card-inner shadow-2xl rounded-2xl">
+                            <!-- Card Front -->
+                            <div class="card-front bg-paperCard border-4 border-woodBorder p-6 flex flex-col justify-between items-center relative">
+                                <div class="washi-tape tape-top-left"></div>
+                                <span class="text-xs font-bold text-woodDark/60 uppercase tracking-widest">انقر للقلب والكشف عن الإجابة</span>
+                                
+                                <div class="my-auto">
+                                    <span id="quiz-card-prompt" class="text-7xl font-bold font-german text-woodDark block">A</span>
+                                    <span id="quiz-card-hint" class="text-sm font-handwriting text-vintageRed text-2xl mt-2 block">ما هو النطق والمثال لهذا الحرف؟</span>
+                                </div>
+
+                                <button onclick="event.stopPropagation(); speakQuizCurrent();" class="px-4 py-2 bg-woodDark text-paperBg rounded-full text-xs font-bold flex items-center gap-2 hover:bg-woodAccent transition-colors">
+                                    <i class="fa-solid fa-volume-high text-warmAmber"></i> استمع للعلامة الصوتية
+                                </button>
+                            </div>
+
+                            <!-- Card Back -->
+                            <div class="card-back bg-woodDark text-paperBg border-4 border-warmAmber p-6 flex flex-col justify-between items-center relative">
+                                <div class="text-xs text-warmAmber font-bold uppercase tracking-widest">الإجابة الصحيحة</div>
+                                
+                                <div class="my-auto text-center">
+                                    <div id="quiz-card-answer" class="text-5xl font-bold font-german text-warmAmber mb-1">A</div>
+                                    <div id="quiz-card-phonetic" class="text-2xl font-bold text-paperBg font-arabicClassic mb-2">آ (Aa)</div>
+                                    <div id="quiz-card-example" class="text-lg text-kraft">
+                                        <span class="text-2xl">🍎</span> Apfel (أبفيل) - تفاحة
+                                    </div>
+                                </div>
+
+                                <div class="text-xs text-kraft/70">هل أجبت إجابة صحيحة؟</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Answer Feedback Controls -->
+                    <div class="flex justify-center gap-4">
+                        <button onclick="handleQuizAnswer(false)" class="flex-1 bg-red-800 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-xmark"></i>
+                            <span>خطأ (لم أعرف)</span>
+                        </button>
+                        <button onclick="handleQuizAnswer(true)" class="flex-1 bg-emerald-800 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-check"></i>
+                            <span>صحيح (عرفت الإجابة)</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+        </main>
+
+        <!-- FOOTER & QUICK TIPS -->
+        <footer class="mt-6 bg-woodDark rounded-xl p-4 text-paperBg text-center text-xs border border-woodBorder shadow-md flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div class="flex items-center gap-2 font-arabicClassic text-sm">
+                <i class="fa-solid fa-book-bookmark text-warmAmber"></i>
+                <span>مصمم خصيصاً لتعلم الألمانية بأسلوب مبسط وشيق</span>
+            </div>
+            <div class="text-kraft/70">
+                <span>توجيه: انقر على أي حرف أو رقم للاستماع للنطق الألماني السليم بالصوت الطبيعي.</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- AUDIO ENGINE & JAVASCRIPT LOGIC -->
+    <script>
+        /* ==========================================================================
+           DATA STRUCTURES (German Alphabet & Numbers with Phonetics)
+           ========================================================================== */
+        
+        const germanAlphabet = [
+            { char: 'A a', name: 'A', phonetic: 'آ', sound: 'A', example: 'Apfel', translation: 'تفاحة', emoji: '🍎', category: 'vowel' },
+            { char: 'B b', name: 'B', phonetic: 'بِه', sound: 'B', example: 'Buch', translation: 'كتاب', emoji: '📖', category: 'consonant' },
+            { char: 'C c', name: 'C', phonetic: 'تسه', sound: 'C', example: 'Computer', translation: 'حاسوب', emoji: '💻', category: 'consonant' },
+            { char: 'D d', name: 'D', phonetic: 'دِه', sound: 'D', example: 'Dach', translation: 'سقف', emoji: '🏠', category: 'consonant' },
+            { char: 'E e', name: 'E', phonetic: 'إِه', sound: 'E', example: 'Elefant', translation: 'فيل', emoji: '🐘', category: 'vowel' },
+            { char: 'F f', name: 'F', phonetic: 'إف', sound: 'F', example: 'Fisch', translation: 'سمكة', emoji: '🐟', category: 'consonant' },
+            { char: 'G g', name: 'G', phonetic: 'جِه (مصرية)', sound: 'G', example: 'Garten', translation: 'حديقة', emoji: '🏡', category: 'consonant' },
+            { char: 'H h', name: 'H', phonetic: 'ها', sound: 'H', example: 'Haus', translation: 'منزل', emoji: '🛖', category: 'consonant' },
+            { char: 'I i', name: 'I', phonetic: 'إي', sound: 'I', example: 'Igel', translation: 'قنفذ', emoji: '🦔', category: 'vowel' },
+            { char: 'J j', name: 'J', phonetic: 'يوت', sound: 'J', example: 'Junge', translation: 'ولد', emoji: '👦', category: 'consonant' },
+            { char: 'K k', name: 'K', phonetic: 'كا', sound: 'K', example: 'Katze', translation: 'قطة', emoji: '🐱', category: 'consonant' },
+            { char: 'L l', name: 'L', phonetic: 'إل', sound: 'L', example: 'Lampe', translation: 'مصباح', emoji: '💡', category: 'consonant' },
+            { char: 'M m', name: 'M', phonetic: 'إم', sound: 'M', example: 'Mond', translation: 'قمر', emoji: '🌙', category: 'consonant' },
+            { char: 'N n', name: 'N', phonetic: 'إن', sound: 'N', example: 'Nase', translation: 'أنف', emoji: '👃', category: 'consonant' },
+            { char: 'O o', name: 'O', phonetic: 'أوه', sound: 'O', example: 'Orange', translation: 'برتقال', emoji: '🍊', category: 'vowel' },
+            { char: 'P p', name: 'P', phonetic: 'پِه', sound: 'P', example: 'Papagei', translation: 'ببغاء', emoji: '🦜', category: 'consonant' },
+            { char: 'Q q', name: 'Q', phonetic: 'كو', sound: 'Q', example: 'Qualle', translation: 'قنديل بحر', emoji: '🪼', category: 'consonant' },
+            { char: 'R r', name: 'R', phonetic: 'إر / غين', sound: 'R', example: 'Regen', translation: 'مطر', emoji: '🌧️', category: 'consonant' },
+            { char: 'S s', name: 'S', phonetic: 'إس / زين', sound: 'S', example: 'Sonne', translation: 'شمس', emoji: '☀️', category: 'consonant' },
+            { char: 'T t', name: 'T', phonetic: 'تِه', sound: 'T', example: 'Tisch', translation: 'طاولة', emoji: '🪑', category: 'consonant' },
+            { char: 'U u', name: 'U', phonetic: 'أو', sound: 'U', example: 'Uhr', translation: 'ساعة', emoji: '⌚', category: 'vowel' },
+            { char: 'V v', name: 'V', phonetic: 'فاو', sound: 'V', example: 'Vogel', translation: 'عصفور', emoji: '🐦', category: 'consonant' },
+            { char: 'W w', name: 'W', phonetic: 'ڤِه', sound: 'W', example: 'Wasser', translation: 'ماء', emoji: '💧', category: 'consonant' },
+            { char: 'X x', name: 'X', phonetic: 'إكس', sound: 'X', example: 'Xylophon', translation: 'إكسيلوفون', emoji: '🎼', category: 'consonant' },
+            { char: 'Y y', name: 'Y', phonetic: 'إبسيلون', sound: 'Y', example: 'Yacht', translation: 'يخت', emoji: '🛥️', category: 'consonant' },
+            { char: 'Z z', name: 'Z', phonetic: 'تسِت', sound: 'Z', example: 'Zitrone', translation: 'ليمون', emoji: '🍋', category: 'consonant' },
+            
+            // Special German Characters (Sonderzeichen)
+            { char: 'Ä ä', name: 'Ä', phonetic: 'إيه مفخمة', sound: 'Ä', example: 'Äpfel', translation: 'تفاحات', emoji: '🍎', category: 'special' },
+            { char: 'Ö ö', name: 'Ö', phonetic: 'أُو مكسورة', sound: 'Ö', example: 'Öl', translation: 'زيت', emoji: '🫗', category: 'special' },
+            { char: 'Ü ü', name: 'Ü', phonetic: 'إِي مضمومة', sound: 'Ü', example: 'Übung', translation: 'تمرين', emoji: '📝', category: 'special' },
+            { char: 'ß', name: 'Eszett', phonetic: 'إس تسيت (ss)', sound: 'Eszett', example: 'Straße', translation: 'شارع', emoji: '🛣️', category: 'special' }
+        ];
+
+        const germanNumbers = [
+            { num: 0, German: 'Null', phonetic: 'نُول', countDots: 0, group: '0-10' },
+            { num: 1, German: 'Eins', phonetic: 'آينْس', countDots: 1, group: '0-10' },
+            { num: 2, German: 'Zwei', phonetic: 'تسڤاي', countDots: 2, group: '0-10' },
+            { num: 3, German: 'Drei', phonetic: 'دراي', countDots: 3, group: '0-10' },
+            { num: 4, German: 'Vier', phonetic: 'فِير', countDots: 4, group: '0-10' },
+            { num: 5, German: 'Fünf', phonetic: 'فُونْف', countDots: 5, group: '0-10' },
+            { num: 6, German: 'Sechs', phonetic: 'زِيكْس', countDots: 6, group: '0-10' },
+            { num: 7, German: 'Sieben', phonetic: 'زِيبْن', countDots: 7, group: '0-10' },
+            { num: 8, German: 'Acht', phonetic: 'أَخْت', countDots: 8, group: '0-10' },
+            { num: 9, German: 'Neun', phonetic: 'نُويْن', countDots: 9, group: '0-10' },
+            { num: 10, German: 'Zehn', phonetic: 'تسين', countDots: 10, group: '0-10' },
+            
+            { num: 11, German: 'Elf', phonetic: 'إِلْف', countDots: 11, group: '11-20' },
+            { num: 12, German: 'Zwölf', phonetic: 'تسڤُولْف', countDots: 12, group: '11-20' },
+            { num: 13, German: 'Dreizehn', phonetic: 'دراي-تسين', countDots: 13, group: '11-20' },
+            { num: 14, German: 'Vierzehn', phonetic: 'فير-تسين', countDots: 14, group: '11-20' },
+            { num: 15, German: 'Fünfzehn', phonetic: 'فونف-تسين', countDots: 15, group: '11-20' },
+            { num: 16, German: 'Sechzehn', phonetic: 'زيخ-تسين', countDots: 16, group: '11-20' },
+            { num: 17, German: 'Siebzehn', phonetic: 'زيب-تسين', countDots: 17, group: '11-20' },
+            { num: 18, German: 'Achtzehn', phonetic: 'أخت-تسين', countDots: 18, group: '11-20' },
+            { num: 19, German: 'Neunzehn', phonetic: 'نوين-تسين', countDots: 19, group: '11-20' },
+            { num: 20, German: 'Zwanzig', phonetic: 'تسڤانْتسيش', countDots: 20, group: '11-20' },
+
+            // Tens
+            { num: 30, German: 'Dreißig', phonetic: 'دراي-سيش', countDots: 3, group: 'tens' },
+            { num: 40, German: 'Vierzig', phonetic: 'فير-تسيش', countDots: 4, group: 'tens' },
+            { num: 50, German: 'Fünfzig', phonetic: 'فونف-تسيش', countDots: 5, group: 'tens' },
+            { num: 60, German: 'Sechzig', phonetic: 'زيخ-تسيش', countDots: 6, group: 'tens' },
+            { num: 70, German: 'Siebzig', phonetic: 'زيب-تسيش', countDots: 7, group: 'tens' },
+            { num: 80, German: 'Achtzig', phonetic: 'أخت-تسيش', countDots: 8, group: 'tens' },
+            { num: 90, German: 'Neunzig', phonetic: 'نوين-تسيش', countDots: 9, group: 'tens' },
+            { num: 100, German: 'Hundert', phonetic: 'هُونْدَرْت', countDots: 10, group: 'tens' }
+        ];
+
+        /* ==========================================================================
+           SPEECH SYNTHESIS ENGINE (German Voice Output)
+           ========================================================================== */
+        
+        let germanVoice = null;
+
+        function initSpeechEngine() {
+            if ('speechSynthesis' in window) {
+                function loadVoices() {
+                    const voices = window.speechSynthesis.getVoices();
+                    // Prefer native German voice
+                    germanVoice = voices.find(v => v.lang.startsWith('de') || v.lang === 'de-DE') || voices[0];
+                    
+                    const statusEl = document.getElementById('speech-status');
+                    if (germanVoice) {
+                        statusEl.textContent = `محرك النطق يعمل بنجاح (${germanVoice.name})`;
+                    } else {
+                        statusEl.textContent = "محرك النطق النمطي يعمل (صوت عام)";
+                    }
+                }
+
+                loadVoices();
+                if (speechSynthesis.onvoiceschanged !== undefined) {
+                    speechSynthesis.onvoiceschanged = loadVoices;
+                }
+            } else {
+                document.getElementById('speech-status').textContent = "تنبيه: محرك الصوت غير مدعوم في متصفحك بشكل كامل";
+            }
+        }
+
+        function speakGerman(text) {
+            if (!('speechSynthesis' in window)) return;
+
+            // Stop any ongoing speech
+            window.speechSynthesis.cancel();
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'de-DE';
+            utterance.rate = 0.85; // Slightly slower for clarity
+            utterance.pitch = 1.0;
+
+            if (germanVoice) {
+                utterance.voice = germanVoice;
+            }
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function testAudioEngine() {
+            speakGerman("Guten Tag! Willkommen.");
+        }
+
+
+        /* ==========================================================================
+           TAB NAVIGATION & VIEW LOGIC
+           ========================================================================== */
+        
+        let activeTab = 'alphabet';
+
+        function switchTab(tabId) {
+            activeTab = tabId;
+
+            // Update tab styles
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('wood-btn-active');
+                tab.classList.add('opacity-80');
+            });
+
+            const currentTabBtn = document.getElementById(`tab-${tabId}`);
+            currentTabBtn.classList.add('wood-btn-active');
+            currentTabBtn.classList.remove('opacity-80');
+
+            // Hide/Show Views
+            document.querySelectorAll('.tab-view').forEach(view => view.classList.add('hidden'));
+            document.getElementById(`view-${tabId}`).classList.remove('hidden');
+
+            // Handle Search Bar Visibility
+            const searchSection = document.getElementById('search-section');
+            if (tabId === 'quiz') {
+                searchSection.classList.add('hidden');
+                startQuiz(currentQuizMode);
+            } else {
+                searchSection.classList.remove('hidden');
+                setupCategoryFilters();
+            }
+        }
+
+
+        /* ==========================================================================
+           RENDER ALPHABET CARDS
+           ========================================================================== */
+        
+        function renderAlphabet(items = germanAlphabet) {
+            const grid = document.getElementById('alphabet-grid');
+            grid.innerHTML = '';
+
+            document.getElementById('alphabet-count').textContent = `${items.length} حرفاً`;
+
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "bg-paperCard border-2 border-woodBorder rounded-xl p-4 flex flex-col justify-between shadow-md hover:shadow-xl transition-all hover:-translate-y-1 relative group cursor-pointer overflow-hidden";
+                card.onclick = () => speakGerman(item.example ? `${item.name}. ${item.example}` : item.name);
+
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-3xl font-extrabold font-german text-woodDark group-hover:text-vintageRed transition-colors">${item.char}</span>
+                        <button onclick="event.stopPropagation(); speakGerman('${item.name}')" class="w-8 h-8 rounded-full bg-woodDark text-warmAmber hover:bg-woodAccent flex items-center justify-center transition-colors shadow" title="استمع لنطق الحرف">
+                            <i class="fa-solid fa-volume-high text-xs"></i>
+                        </button>
+                    </div>
+
+                    <div class="my-2 bg-woodDark/5 p-2 rounded-lg border border-woodDark/10">
+                        <div class="text-xs text-woodDark/60 font-bold mb-0.5">النطق بالعربي:</div>
+                        <div class="text-lg font-bold text-vintageRed font-arabicClassic">${item.phonetic}</div>
+                    </div>
+
+                    <div class="mt-2 pt-2 border-t border-woodDark/10 flex items-center justify-between text-xs">
+                        <div class="flex items-center gap-1.5">
+                            <span class="text-xl">${item.emoji}</span>
+                            <div>
+                                <span class="font-bold text-woodDark block font-german">${item.example}</span>
+                                <span class="text-woodDark/70 font-arabic">${item.translation}</span>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-play text-woodDark/30 group-hover:text-woodDark transition-colors"></i>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+
+        /* ==========================================================================
+           RENDER NUMBERS CARDS
+           ========================================================================== */
+        
+        let currentNumGroup = 'all';
+
+        function renderNumbers(filterGroup = 'all', items = germanNumbers) {
+            currentNumGroup = filterGroup;
+            const grid = document.getElementById('numbers-grid');
+            grid.innerHTML = '';
+
+            // Filter button active styles
+            document.querySelectorAll('.num-filter-btn').forEach(btn => {
+                btn.className = "num-filter-btn px-2.5 py-1 text-xs font-bold rounded bg-woodDark/10 text-woodDark hover:bg-woodDark/20";
+            });
+            event?.target?.classList?.add('bg-woodDark', 'text-paperBg');
+
+            let filtered = items;
+            if (filterGroup !== 'all') {
+                filtered = items.filter(n => n.group === filterGroup);
+            }
+
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "bg-paperCard border-2 border-woodBorder rounded-xl p-4 flex flex-col justify-between shadow-md hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer group";
+                card.onclick = () => speakGerman(`${item.num}. ${item.German}`);
+
+                // Dots counter visualization
+                let dotsHtml = '';
+                if (item.countDots > 0 && item.countDots <= 20) {
+                    dotsHtml = Array(item.countDots).fill(0).map(() => 
+                        `<span class="w-2 h-2 rounded-full bg-vintageRed inline-block"></span>`
+                    ).join('');
+                }
+
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-4xl font-extrabold font-german text-vintageRed">${item.num}</span>
+                        <button onclick="event.stopPropagation(); speakGerman('${item.German}')" class="w-8 h-8 rounded-full bg-woodDark text-warmAmber hover:bg-woodAccent flex items-center justify-center transition-colors shadow">
+                            <i class="fa-solid fa-volume-high text-xs"></i>
+                        </button>
+                    </div>
+
+                    <div class="my-1">
+                        <span class="text-2xl font-bold font-german text-woodDark block">${item.German}</span>
+                        <span class="text-base font-bold text-oliveGreen font-arabicClassic">${item.phonetic}</span>
+                    </div>
+
+                    ${dotsHtml ? `<div class="flex flex-wrap gap-1 my-2 p-1.5 bg-woodDark/5 rounded-md">${dotsHtml}</div>` : ''}
+
+                    <div class="mt-2 text-left">
+                        <span class="text-[10px] text-woodDark/60 font-bold">انقر لسماع العدد بالعبرية والألمانية</span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+
+        /* ==========================================================================
+           SEARCH & FILTER CONTROLS
+           ========================================================================== */
+        
+        function setupCategoryFilters() {
+            const container = document.getElementById('category-filters');
+            container.innerHTML = '';
+
+            if (activeTab === 'alphabet') {
+                const filters = [
+                    { id: 'all', label: 'الكل' },
+                    { id: 'vowel', label: 'حروف علة' },
+                    { id: 'consonant', label: 'حروف ساكنة' },
+                    { id: 'special', label: 'حروف خاصة (Ä, Ö...)' }
+                ];
+
+                filters.forEach(f => {
+                    const btn = document.createElement('button');
+                    btn.className = "px-2.5 py-1 text-xs rounded-lg font-bold bg-woodMedium text-paperBg hover:bg-woodAccent whitespace-nowrap transition-colors";
+                    btn.textContent = f.label;
+                    btn.onclick = () => {
+                        if (f.id === 'all') renderAlphabet(germanAlphabet);
+                        else renderAlphabet(germanAlphabet.filter(a => a.category === f.id));
+                    };
+                    container.appendChild(btn);
+                });
+            }
+        }
+
+        function filterContent() {
+            const query = document.getElementById('search-input').value.toLowerCase().trim();
+
+            if (activeTab === 'alphabet') {
+                const filtered = germanAlphabet.filter(item => 
+                    item.char.toLowerCase().includes(query) ||
+                    item.phonetic.includes(query) ||
+                    item.example.toLowerCase().includes(query) ||
+                    item.translation.includes(query)
+                );
+                renderAlphabet(filtered);
+            } else if (activeTab === 'numbers') {
+                const filtered = germanNumbers.filter(item => 
+                    item.num.toString().includes(query) ||
+                    item.German.toLowerCase().includes(query) ||
+                    item.phonetic.includes(query)
+                );
+                renderNumbers('all', filtered);
+            }
+        }
+
+
+        /* ==========================================================================
+           QUIZ & PRACTICE GAME LOGIC
+           ========================================================================== */
+        
+        let currentQuizMode = 'alphabet'; // 'alphabet' or 'numbers'
+        let quizDeck = [];
+        let currentQuizIndex = 0;
+        let quizScore = 0;
+        let isCardFlipped = false;
+
+        function startQuiz(mode = 'alphabet') {
+            currentQuizMode = mode;
+            currentQuizIndex = 0;
+            quizScore = 0;
+            isCardFlipped = false;
+
+            document.querySelectorAll('.quiz-mode-btn').forEach(btn => btn.classList.remove('wood-btn-active'));
+            document.getElementById(`quiz-mode-${mode}`).classList.add('wood-btn-active');
+
+            // Shuffle Deck
+            if (mode === 'alphabet') {
+                quizDeck = [...germanAlphabet].sort(() => Math.random() - 0.5).slice(0, 10);
+            } else {
+                quizDeck = [...germanNumbers].sort(() => Math.random() - 0.5).slice(0, 10);
+            }
+
+            updateQuizUI();
+        }
+
+        function updateQuizUI() {
+            const cardEl = document.getElementById('quiz-card');
+            cardEl.classList.remove('flipped');
+            isCardFlipped = false;
+
+            const item = quizDeck[currentQuizIndex];
+            if (!item) return;
+
+            document.getElementById('quiz-progress').textContent = `${currentQuizIndex + 1} من ${quizDeck.length}`;
+            document.getElementById('quiz-score').textContent = `${quizScore} / ${currentQuizIndex}`;
+
+            if (currentQuizMode === 'alphabet') {
+                document.getElementById('quiz-card-prompt').textContent = item.name;
+                document.getElementById('quiz-card-hint').textContent = "ما هو نطق هذا الحرف ومثاله؟";
+                
+                document.getElementById('quiz-card-answer').textContent = item.char;
+                document.getElementById('quiz-card-phonetic').textContent = `${item.phonetic}`;
+                document.getElementById('quiz-card-example').innerHTML = `${item.emoji} ${item.example} (${item.translation})`;
+            } else {
+                document.getElementById('quiz-card-prompt').textContent = item.num;
+                document.getElementById('quiz-card-hint').textContent = "كيف نكتب وننطق هذا الرقم بالألمانية؟";
+
+                document.getElementById('quiz-card-answer').textContent = item.num;
+                document.getElementById('quiz-card-phonetic').textContent = `${item.German} - (${item.phonetic})`;
+                document.getElementById('quiz-card-example').textContent = `العدد بالعبرية/العربية: ${item.num}`;
+            }
+        }
+
+        function flipQuizCard() {
+            const cardEl = document.getElementById('quiz-card');
+            cardEl.classList.toggle('flipped');
+            isCardFlipped = !isCardFlipped;
+
+            // Automatically speak German sound when flipped to reveal answer
+            if (isCardFlipped) {
+                speakQuizCurrent();
+            }
+        }
+
+        function speakQuizCurrent() {
+            const item = quizDeck[currentQuizIndex];
+            if (!item) return;
+
+            if (currentQuizMode === 'alphabet') {
+                speakGerman(`${item.name}. ${item.example}`);
+            } else {
+                speakGerman(`${item.num}. ${item.German}`);
+            }
+        }
+
+        function handleQuizAnswer(isCorrect) {
+            if (isCorrect) quizScore++;
+
+            currentQuizIndex++;
+
+            if (currentQuizIndex >= quizDeck.length) {
+                // Finish Quiz
+                alert(`أحسنت! أكملت الاختبار بنجاح.\nنتيجتك: ${quizScore} من ${quizDeck.length}`);
+                resetQuiz();
+            } else {
+                updateQuizUI();
+            }
+        }
+
+        function resetQuiz() {
+            startQuiz(currentQuizMode);
+        }
+
+        /* ==========================================================================
+           INITIALIZATION ON LOAD
+           ========================================================================== */
+        
+        window.onload = function() {
+            initSpeechEngine();
+            renderAlphabet();
+            renderNumbers();
+            setupCategoryFilters();
+        };
+
+    </script>
+</body>
+</html>
